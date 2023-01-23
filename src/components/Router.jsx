@@ -4,14 +4,17 @@ import Auth from "../routes/Auth";
 import EditProfile from "../routes/EditProfile";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
-import Navigation from "./Navigation.js";
+import Navigation from "./Navigation.jsx";
 
-export default function Router({ isLoggedIn }) {
+export default function Router({ isLoggedIn, userObj }) {
   return (
     <>
       {isLoggedIn && <Navigation />}
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Home /> : <Auth />}></Route>
+        <Route
+          path="/"
+          element={isLoggedIn ? <Home userObj={userObj} /> : <Auth />}
+        ></Route>
         <Route path="/editProfile" element={<EditProfile />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <></>
