@@ -1,22 +1,23 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Auth from "../routes/Auth";
-import EditProfile from "../routes/EditProfile";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
 import Navigation from "./Navigation.jsx";
 
-export default function Router({ isLoggedIn, userObj }) {
+export default function Router({ isLoggedIn, userObj, refreshUser }) {
   return (
     <>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <Navigation userObj={userObj} />}
       <Routes>
         <Route
           path="/"
           element={isLoggedIn ? <Home userObj={userObj} /> : <Auth />}
         ></Route>
-        <Route path="/editProfile" element={<EditProfile />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/profile"
+          element={<Profile userObj={userObj} refreshUser={refreshUser} />}
+        ></Route>
         <></>
       </Routes>
     </>

@@ -11,15 +11,31 @@ function App() {
       if (user) {
         setIsLoggedIn(true);
         setUserObj(user);
+        if (user.displayName === null) {
+          const name = user.email.split("@")[0];
+          user.displayName = name;
+        }
       } else {
         setIsLoggedIn(false);
       }
       setInit(true);
     });
   }, []);
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({ ...user });
+  };
   return (
     <>
-      {init ? <Router isLoggedIn={isLoggedIn} userObj={userObj} /> : "준비중"}
+      {init ? (
+        <Router
+          isLoggedIn={isLoggedIn}
+          userObj={userObj}
+          refreshUser={refreshUser}
+        />
+      ) : (
+        "준비중"
+      )}
     </>
   );
 }

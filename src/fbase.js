@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
 import {
   getFirestore,
   addDoc,
@@ -10,8 +10,15 @@ import {
   orderBy,
   doc,
   deleteDoc,
+  where,
 } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -25,6 +32,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const authService = getAuth(app);
+export const authUpdateProfile = updateProfile;
 export const database = getDatabase(app);
 export const dbService = getFirestore();
 export const dbAddDoc = addDoc;
@@ -35,4 +43,9 @@ export const dbOnSnapshot = onSnapshot;
 export const dbOrderBy = orderBy;
 export const dbDoc = doc;
 export const dbDeleteDoc = deleteDoc;
-export const storageService = getStorage;
+export const dbGetStorage = getStorage;
+export const dbRef = ref;
+export const dbUploadString = uploadString;
+export const dbGetDownloadURL = getDownloadURL;
+export const dbDeleteObject = deleteObject;
+export const dbWhere = where;

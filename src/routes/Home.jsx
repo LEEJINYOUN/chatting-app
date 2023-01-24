@@ -6,17 +6,23 @@ import {
   dbCollection,
   dbQuery,
   dbOnSnapshot,
-  storageService,
+  dbOrderBy,
+  dbGetStorage,
+  dbRef,
+  dbUploadString,
+  dbGetDownloadURL,
 } from "fbase";
-import { getStorage, ref, uploadString } from "firebase/storage";
 import Chat from "components/Chat";
 
 const Home = function Home({ userObj }) {
   const [chatting, setChatting] = useState("");
   const [chatContents, setChatContents] = useState([]);
-  const [chatFile, setChatFile] = useState();
+  const [chatFile, setChatFile] = useState("");
   useEffect(() => {
-    const chatQuery = dbQuery(dbCollection(dbService, "chatting"));
+    const chatQuery = dbQuery(
+      dbCollection(dbService, "chatting"),
+      dbOrderBy("createdAt", "asc")
+    );
     dbOnSnapshot(chatQuery, (snapshot) => {
       const chatArr = snapshot.docs.map((document) => ({
         id: document.id,
@@ -25,22 +31,24 @@ const Home = function Home({ userObj }) {
       setChatContents(chatArr);
     });
   }, []);
-  const storage = getStorage();
+  const storage = dbGetStorage();
   const onSubmit = async (e) => {
     e.preventDefault();
-    const fileRef = ref(storage, `${userObj.uid}/${uuidv4()}`);
-    const response = uploadString(fileRef, chatFile, "data_url");
-    console.log(response);
-    // try {
-    //   await dbAddDoc(dbCollection(dbService, "chatting"), {
-    //     text: chatting,
-    //     createdAt: Date.now(),
-    //     creatorId: userObj.uid,
-    //   });
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    let chatFileUrl = "";
+    if (chatFile !== "") {
+      const fileRef = dbRef(storage, `${userObj.uid}/${uuidv4()}`);
+      const response = await dbUploadString(fileRef, chatFile, "data_url");
+      chatFileUrl = await dbGetDownloadURL(response.ref);
+    }
+    const chattingObj = {
+      text: chatting,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      chatFileUrl,
+    };
+    await dbAddDoc(dbCollection(dbService, "chatting"), chattingObj);
     setChatting("");
+    setChatFile("");
   };
   const onChange = (e) => {
     const {
@@ -90,6 +98,7 @@ const Home = function Home({ userObj }) {
             key={item.id}
             chatObj={item}
             isOwner={item.creatorId === userObj.uid}
+            storage={storage}
           />
         ))}
       </div>
