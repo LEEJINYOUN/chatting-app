@@ -1,3 +1,4 @@
+import "./css/Auth.css";
 import AuthForm from "components/AuthForm";
 import { authService } from "fbase";
 import {
@@ -10,7 +11,6 @@ import { useState } from "react";
 
 const Auth = function Auth() {
   const [newAccount, setNewAccount] = useState(true);
-
   const toggleAccount = () => {
     setNewAccount((prev) => !prev);
   };
@@ -27,18 +27,42 @@ const Auth = function Auth() {
     await signInWithPopup(authService, provider);
   };
   return (
-    <div>
+    <>
       <AuthForm newAccount={newAccount} />
-      <span onClick={toggleAccount}>{newAccount ? "로그인" : "회원가입"}</span>
-      <div>
-        <button onClick={onSocialClick} name="google">
-          구글로 로그인
+      <div className="authSwitchContainer">
+        {newAccount ? (
+          <>
+            <span className="authQuestion">회원인가요?</span>
+            <span onClick={toggleAccount} className="authSwitch">
+              로그인
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="authQuestion">처음인가요?</span>
+            <span onClick={toggleAccount} className="authSwitch">
+              회원가입
+            </span>
+          </>
+        )}
+      </div>
+      <div className="authOtherWay">
+        <button
+          onClick={onSocialClick}
+          name="google"
+          className="otherWayBtn googleBtn"
+        >
+          구글 로그인
         </button>
-        <button onClick={onSocialClick} name="github">
-          깃허브로 로그인
+        <button
+          onClick={onSocialClick}
+          name="github"
+          className="otherWayBtn githubBtn"
+        >
+          깃허브 로그인
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

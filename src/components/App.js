@@ -1,9 +1,9 @@
+import "./css/App.css";
 import React, { useEffect, useState } from "react";
 import Router from "components/Router";
 import { authService } from "fbase";
 
 function App() {
-  const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
@@ -19,7 +19,6 @@ function App() {
         setIsLoggedIn(false);
         setUserObj(null);
       }
-      setInit(true);
     });
   }, []);
   const refreshUser = () => {
@@ -27,17 +26,13 @@ function App() {
     setUserObj({ ...user });
   };
   return (
-    <>
-      {init ? (
-        <Router
-          isLoggedIn={isLoggedIn}
-          userObj={userObj}
-          refreshUser={refreshUser}
-        />
-      ) : (
-        "준비중"
-      )}
-    </>
+    <div className="mainContainer">
+      <Router
+        isLoggedIn={isLoggedIn}
+        userObj={userObj}
+        refreshUser={refreshUser}
+      />
+    </div>
   );
 }
 

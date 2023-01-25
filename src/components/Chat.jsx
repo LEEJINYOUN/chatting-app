@@ -1,7 +1,7 @@
 import React from "react";
 import { dbService, dbDoc, dbDeleteDoc, dbDeleteObject, dbRef } from "fbase";
 
-export default function Chat({ chatObj, isOwner, storage, chatFileUrl }) {
+export default function Chat({ chatObj, isOwner, storage }) {
   const onDeleteClick = async () => {
     const ok = window.confirm("삭제 하시겠습니까?");
     const chatDelete = dbDoc(dbService, "chatting", `${chatObj.id}`);
