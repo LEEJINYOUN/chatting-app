@@ -20,10 +20,7 @@ export default function Profile({ userObj, refreshUser }) {
       dbWhere("creatorId", "==", userObj.uid),
       dbOrderBy("createdAt", "asc")
     );
-    const querySnapshot = await dbGetDocs(query);
-    querySnapshot.forEach((doc) => {
-      // console.log(doc.id, " => ", doc.data());
-    });
+    await dbGetDocs(query);
   };
   useEffect(() => {
     getMyChats();
