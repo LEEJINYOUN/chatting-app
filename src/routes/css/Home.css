@@ -1,0 +1,17 @@
+.homeContainer {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  width: 490px;
+  height: 540px;
+  background-color: #b2c7da;
+}
+
+.homeContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.chatBox {
+  margin-top: 30px;
+}

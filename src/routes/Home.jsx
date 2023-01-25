@@ -1,3 +1,4 @@
+import "./css/Home.css";
 import React, { useEffect, useState } from "react";
 import {
   dbService,
@@ -27,19 +28,21 @@ const Home = function Home({ userObj }) {
   }, []);
   const storage = dbGetStorage();
   return (
-    <div>
-      <HomeForm userObj={userObj} storage={storage} />
-      <div>
-        {chatContents.map((item) => (
-          <Chat
-            key={item.id}
-            chatObj={item}
-            isOwner={item.creatorId === userObj.uid}
-            storage={storage}
-          />
-        ))}
+    <>
+      <div className="homeContainer">
+        <div className="chatBox">
+          {chatContents.map((item) => (
+            <Chat
+              key={item.id}
+              chatObj={item}
+              isOwner={item.creatorId === userObj.uid}
+              storage={storage}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <HomeForm userObj={userObj} storage={storage} />
+    </>
   );
 };
 

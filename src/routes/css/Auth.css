@@ -1,3 +1,10 @@
+.authContainer {
+  margin: 20px auto 0 auto;
+  width: 490px;
+  height: 700px;
+  background-color: #ffeb33;
+}
+
 .authSwitchContainer,
 .authOtherWay {
   display: flex;
@@ -47,20 +54,18 @@
 
 .googleBtn {
   background-color: #5485ec;
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
 }
 
 .googleBtn:hover {
   background-color: #3068e0;
-  transition: all 0.5s ease;
 }
 
 .githubBtn {
   background-color: rgb(58, 50, 50);
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
 }
 
 .githubBtn:hover {
   background-color: black;
-  transition: all 0.5s ease;
 }

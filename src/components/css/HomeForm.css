@@ -1,0 +1,114 @@
+.homeFormContainer {
+  display: flex;
+  margin: auto;
+  width: 490px;
+  height: 100px;
+  border-left: 1px solid #b2c7da;
+  border-right: 1px solid #b2c7da;
+  border-bottom: 1px solid #b2c7da;
+}
+
+.homeForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.homeFormFile,
+.homeFormInput,
+.homeFormSubmit {
+  height: 100%;
+}
+
+.homeFormFile {
+  width: 100px;
+}
+
+.homeFormFileUpload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.homeFormFileClear {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #04aaff;
+  cursor: pointer;
+  height: 20px;
+}
+
+.homeFormFileClear span {
+  height: 10px;
+  font-size: 12px;
+}
+
+.homeFormFileImage {
+  display: flex;
+  justify-content: center;
+  height: 80px;
+}
+
+.homeFormFileImage img {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}
+
+.homeFormFileInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #04aaff;
+  cursor: pointer;
+  height: 100%;
+}
+
+.homeFormFileInput span {
+  font-size: 12px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.homeFormInput {
+  width: 300px;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+.homeFormInput > input {
+  padding-left: 10px;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  border: none;
+}
+
+.homeFormInput > input:focus {
+  outline: none;
+}
+
+.homeFormSubmit {
+  width: 90px;
+}
+
+.homeFormSubmit > input {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: lightgray;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.homeFormSubmit > input:hover {
+  background-color: #ffeb33;
+}

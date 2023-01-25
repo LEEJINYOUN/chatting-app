@@ -1,0 +1,41 @@
+.navContainer {
+  margin: 20px auto 0 auto;
+  width: 490px;
+  height: 60px;
+  background-color: #b2c7da;
+  border-bottom: 1px solid lightgray;
+}
+
+.navUl {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.navHome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navHome:hover,
+.navProfile:hover {
+  color: lightcoral;
+}
+
+.navIcon {
+  font-size: 22px;
+}
+
+.navProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+}

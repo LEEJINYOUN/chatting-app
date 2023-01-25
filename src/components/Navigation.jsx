@@ -1,3 +1,4 @@
+import "./css/Navigation.css";
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
@@ -5,25 +6,16 @@ import { BiUser } from "react-icons/bi";
 
 export default function Navigation({ userObj }) {
   return (
-    <nav>
-      <ul style={{ display: "flex", justifyContent: "center", marginTop: 50 }}>
+    <nav className="navContainer">
+      <ul className="navUl">
         <li>
-          <Link to="/" style={{ marginRight: 10 }}>
-            <AiFillHome />
+          <Link to="/" className="navHome">
+            <AiFillHome className="navIcon" />
           </Link>
         </li>
         <li>
-          <Link
-            to="/profile"
-            style={{
-              marginLeft: 10,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              fontSize: 12,
-            }}
-          >
-            <BiUser />
+          <Link to="/profile" className="navProfile">
+            <BiUser className="navIcon" />
             {userObj.displayName
               ? `${userObj.displayName}님의 프로필`
               : "프로필"}

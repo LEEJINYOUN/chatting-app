@@ -26,13 +26,11 @@ function App() {
     setUserObj({ ...user });
   };
   return (
-    <div className="mainContainer">
-      <Router
-        isLoggedIn={isLoggedIn}
-        userObj={userObj}
-        refreshUser={refreshUser}
-      />
-    </div>
+    <Router
+      isLoggedIn={isLoggedIn}
+      userObj={userObj}
+      refreshUser={refreshUser}
+    />
   );
 }
 

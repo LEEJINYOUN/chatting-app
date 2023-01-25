@@ -1,3 +1,4 @@
+import "./css/HomeForm.css";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -51,25 +52,52 @@ export default function HomeForm({ userObj, storage }) {
     reader.readAsDataURL(theFile);
   };
   const onClearFile = () => {
-    setChatFile(null);
+    setChatFile("");
   };
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        value={chatting}
-        onChange={onChange}
-        placeholder="오늘 기분"
-        maxLength={120}
-      />
-      <input type="file" accept="image/*" onChange={onFileChange} />
-      <input type="submit" value="제출" />
-      {chatFile && (
-        <div>
-          <img src={chatFile} width="50px" height="50px" alt="" />
-          <button onClick={onClearFile}>취소</button>
+    <div className="homeFormContainer">
+      <form onSubmit={onSubmit} className="homeForm">
+        <div className="homeFormFile">
+          {chatFile ? (
+            <div className="homeFormFileUpload">
+              <div className="homeFormFileClear" onClick={onClearFile}>
+                <span>취소</span>
+              </div>
+              <div className="homeFormFileImage">
+                <img
+                  src={chatFile}
+                  style={{
+                    backgroundImage: chatFile,
+                  }}
+                  alt=""
+                />
+              </div>
+            </div>
+          ) : (
+            <label htmlFor="FileUpload" className="homeFormFileInput">
+              <span>사진 추가</span>
+            </label>
+          )}
+          <input
+            id="FileUpload"
+            className="fileInput"
+            type="file"
+            accept="image/*"
+            onChange={onFileChange}
+          />
         </div>
-      )}
-    </form>
+        <div className="homeFormInput">
+          <input
+            type="text"
+            value={chatting}
+            onChange={onChange}
+            maxLength={120}
+          />
+        </div>
+        <div className="homeFormSubmit">
+          <input type="submit" value="입력" />
+        </div>
+      </form>
+    </div>
   );
 }

@@ -27,7 +27,7 @@ const Auth = function Auth() {
     await signInWithPopup(authService, provider);
   };
   return (
-    <>
+    <div className="authContainer">
       <AuthForm newAccount={newAccount} />
       <div className="authSwitchContainer">
         {newAccount ? (
@@ -62,7 +62,7 @@ const Auth = function Auth() {
           깃허브 로그인
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

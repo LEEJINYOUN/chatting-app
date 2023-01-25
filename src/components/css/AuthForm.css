@@ -44,13 +44,12 @@
   cursor: pointer;
   color: gray;
   background-color: #715c5e;
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
 }
 
 .authSubmit:hover {
   background-color: #503e40;
   color: white;
-  transition: all 0.5s ease;
 }
 
 .authError {

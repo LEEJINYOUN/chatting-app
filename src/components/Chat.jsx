@@ -1,5 +1,7 @@
+import "./css/Chat.css";
 import React from "react";
 import { dbService, dbDoc, dbDeleteDoc, dbDeleteObject, dbRef } from "fbase";
+import { BsFillTrashFill } from "react-icons/bs";
 
 export default function Chat({ chatObj, isOwner, storage }) {
   const onDeleteClick = async () => {
@@ -14,14 +16,28 @@ export default function Chat({ chatObj, isOwner, storage }) {
     }
   };
   return (
-    <div key={chatObj.id}>
-      <h4>{chatObj.text}</h4>
-      {chatObj.chatFileUrl && (
-        <img src={chatObj.chatFileUrl} width="50px" height="50px" alt="" />
-      )}
-      {isOwner && <button onClick={onDeleteClick}>삭제</button>}
-
-      <h6>{new Date(chatObj.createdAt).toLocaleString()}</h6>
+    <div
+      className={
+        isOwner
+          ? "chatContainer chatContainerRight"
+          : "chatContainer chatContainerLeft"
+      }
+    >
+      <div
+        className={isOwner ? "chat chatRight" : "chat chatLeft"}
+        key={chatObj.id}
+      >
+        <h4>{chatObj.text}</h4>
+        {chatObj.chatFileUrl && <img src={chatObj.chatFileUrl} alt="" />}
+        {isOwner && (
+          <div className="chatDelete">
+            <span onClick={onDeleteClick}>
+              <BsFillTrashFill />
+            </span>
+          </div>
+        )}
+        <h6>{new Date(chatObj.createdAt).toLocaleString()}</h6>
+      </div>
     </div>
   );
 }
