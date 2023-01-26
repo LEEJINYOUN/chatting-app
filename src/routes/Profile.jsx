@@ -1,54 +1,37 @@
-import React, { useEffect, useState } from "react";
-import {
-  authService,
-  authUpdateProfile,
-  dbService,
-  dbCollection,
-  dbGetDocs,
-  dbQuery,
-  dbWhere,
-  dbOrderBy,
-} from "fbase";
+import "./css/Profile.css";
+import React from "react";
+import { authService } from "fbase";
 import { Link } from "react-router-dom";
 
-export default function Profile({ userObj, refreshUser }) {
-  const onLogOutClick = () => authService.signOut();
-  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-  const getMyChats = async () => {
-    const query = dbQuery(
-      dbCollection(dbService, "chatting"),
-      dbWhere("creatorId", "==", userObj.uid),
-      dbOrderBy("createdAt", "asc")
-    );
-    await dbGetDocs(query);
+export default function Profile() {
+  const onLogOutClick = () => {
+    authService.signOut();
+    window.localStorage.clear();
   };
-  useEffect(() => {
-    getMyChats();
-  });
-  const onChange = (e) => {
-    const {
-      target: { value },
-    } = e;
-    setNewDisplayName(value);
-  };
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (userObj.displayName !== newDisplayName) {
-      await authUpdateProfile(authService.currentUser, {
-        displayName: newDisplayName,
-      });
-      refreshUser();
-    }
-  };
+  const userInformation = JSON.parse(localStorage.getItem("userInformation"));
+
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input onChange={onChange} type="text" value={newDisplayName} />
-        <input type="submit" value="프로필 업데이트" />
-      </form>
-      <Link to="/" onClick={onLogOutClick}>
-        로그아웃
-      </Link>
-    </>
+    <div className="profileContainer">
+      <div className="profileImage">
+        {userInformation.photo === null ? (
+          <img
+            src="https://audition.hanbiton.com/images/common/img_default.jpg"
+            alt=""
+          />
+        ) : (
+          <img src={userInformation.photo} alt="" />
+        )}
+      </div>
+      <div className="profileTitle">
+        <h3>{userInformation.name}</h3>
+        <span>안녕하세요. 환영합니다!</span>
+        <span>{userInformation.email}</span>
+      </div>
+      <div className="profileLogout">
+        <Link to="/" className="profileLogoutBtn" onClick={onLogOutClick}>
+          로그아웃
+        </Link>
+      </div>
+    </div>
   );
 }

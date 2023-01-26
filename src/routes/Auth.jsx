@@ -10,7 +10,7 @@ import React from "react";
 import { useState } from "react";
 
 const Auth = function Auth() {
-  const [newAccount, setNewAccount] = useState(true);
+  const [newAccount, setNewAccount] = useState(false);
   const toggleAccount = () => {
     setNewAccount((prev) => !prev);
   };

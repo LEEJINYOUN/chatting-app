@@ -15,23 +15,19 @@ function App() {
           const name = user.email.split("@")[0];
           user.displayName = name;
         }
+        let userObject = {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        };
+        localStorage.setItem("userInformation", JSON.stringify(userObject));
       } else {
         setIsLoggedIn(false);
         setUserObj(null);
       }
     });
   }, []);
-  const refreshUser = () => {
-    const user = authService.currentUser;
-    setUserObj({ ...user });
-  };
-  return (
-    <Router
-      isLoggedIn={isLoggedIn}
-      userObj={userObj}
-      refreshUser={refreshUser}
-    />
-  );
+  return <Router isLoggedIn={isLoggedIn} userObj={userObj} />;
 }
 
 export default App;
