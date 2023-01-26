@@ -92,6 +92,7 @@ export default function HomeForm({ userObj, storage }) {
             value={chatting}
             onChange={onChange}
             maxLength={120}
+            required
           />
         </div>
         <div className="homeFormSubmit">
