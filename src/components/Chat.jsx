@@ -27,6 +27,7 @@ export default function Chat({ chatObj, isOwner, storage }) {
         className={isOwner ? "chat chatRight" : "chat chatLeft"}
         key={chatObj.id}
       >
+        <h4>&lt;{chatObj.name}&gt;</h4>
         <h4>{chatObj.text}</h4>
         {chatObj.chatFileUrl && <img src={chatObj.chatFileUrl} alt="" />}
         {isOwner && (

@@ -22,6 +22,7 @@ export default function HomeForm({ userObj, storage }) {
       chatFileUrl = await dbGetDownloadURL(response.ref);
     }
     const chattingObj = {
+      name: userObj.displayName,
       text: chatting,
       createdAt: Date.now(),
       creatorId: userObj.uid,
