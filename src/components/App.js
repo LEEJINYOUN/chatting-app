@@ -20,7 +20,7 @@ function App() {
           email: user.email,
           photo: user.photoURL,
         };
-        localStorage.setItem("userInformation", JSON.stringify(userObject));
+        sessionStorage.setItem("userInformation", JSON.stringify(userObject));
       } else {
         setIsLoggedIn(false);
         setUserObj(null);

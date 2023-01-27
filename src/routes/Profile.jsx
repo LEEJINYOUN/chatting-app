@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 export default function Profile() {
   const onLogOutClick = () => {
     authService.signOut();
-    window.localStorage.clear();
+    window.sessionStorage.clear();
   };
-  const userInformation = JSON.parse(localStorage.getItem("userInformation"));
+  const userInformation = JSON.parse(sessionStorage.getItem("userInformation"));
 
   return (
     <div className="profileContainer">
